@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { ChevronDownIcon, ChevronRightIcon } from '@heroicons/react/outline';
 
 class Category extends React.Component {
@@ -24,16 +24,14 @@ class Category extends React.Component {
     const { category } = this.props;
 
     return (
-      <Router>
-        <li className="font-bold mb-2 text-gray-600 text-xs">
-          <span className="flex flex-row cursor-pointer hover:bg-gray-100">
-            {expanded ? <ChevronDownIcon onClick={this.toggle} className="box-content flex-grow-0 h-4 hover:text-blue-600 inline pl-4 pr-2 py-2 w-4" /> : <ChevronRightIcon onClick={this.toggle} className="box-content flex-grow-0 h-4 hover:text-blue-600 inline pl-4 pr-2 py-2 w-4" />}
-            {' '}
-            <Link to={`/categories/${category.id}`} className="flex-grow hover:text-blue-600 pr-4 py-2">{category.title}</Link>
-          </span>
-          <FeedList feeds={category.feeds} expanded={expanded} />
-        </li>
-      </Router>
+      <li className="font-bold mb-2 text-gray-600 text-xs">
+        <span className="flex flex-row cursor-pointer hover:bg-gray-100">
+          {expanded ? <ChevronDownIcon onClick={this.toggle} className="box-content flex-grow-0 h-4 hover:text-blue-600 inline pl-4 pr-2 py-2 w-4" /> : <ChevronRightIcon onClick={this.toggle} className="box-content flex-grow-0 h-4 hover:text-blue-600 inline pl-4 pr-2 py-2 w-4" />}
+          {' '}
+          <Link to={`/categories/${category.id}`} className="flex-grow hover:text-blue-600 pr-4 py-2">{category.title}</Link>
+        </span>
+        <FeedList feeds={category.feeds} expanded={expanded} />
+      </li>
     );
   }
 }
