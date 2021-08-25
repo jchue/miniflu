@@ -1,10 +1,11 @@
-const express = require('express');
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const logger = require('morgan');
+import express from 'express';
+import path from 'path';
+import cookieParser from 'cookie-parser';
+import logger from 'morgan';
+import 'dotenv/config';
 
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
+const feedsRouter = require('./routes/feeds');
 
 const app = express();
 
@@ -15,6 +16,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/feeds', feedsRouter);
 
 module.exports = app;
