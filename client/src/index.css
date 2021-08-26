@@ -29,6 +29,10 @@
     line-height: 1.7;
   }
   
+  #root {
+    height: 100%;
+  }
+
   .fade {
     position: absolute !important;
     left: 15px;

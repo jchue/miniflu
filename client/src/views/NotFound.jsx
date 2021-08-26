@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 
 function NotFound() {
   return (
-    <div className="h-full flex flex-col justify-center">
+    <div className="h-full flex flex-col justify-center pb-20">
       <h1 className="font-bold text-4xl mb-4">404 Not Found</h1>
 
       <p className="text-lg text-gray-500">

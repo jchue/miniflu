@@ -42,10 +42,19 @@ async function getFeedTree() {
   return feedTree;
 }
 
-/* GET feeds listing. */
+/* GET feeds listing */
 router.get('/', async (req, res) => {
   const feedTree = await getFeedTree();
   res.send(feedTree);
+});
+
+/* GET feed entries */
+router.get('/:id/entries', async (req, res) => {
+  const { id } = req.params;
+  const url = `${minifluxBaseURL}/v1/feeds/${id}/entries?order=published_at&direction=desc`;
+
+  const entries = (await axios.get(url, config)).data;
+  res.send(entries);
 });
 
 module.exports = router;
