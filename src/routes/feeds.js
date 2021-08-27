@@ -42,10 +42,24 @@ async function getFeedTree() {
   return feedTree;
 }
 
+async function getFeedInfo(id) {
+  const url = `${minifluxBaseURL}/v1/feeds/${id}`;
+  const feed = (await axios.get(url, config)).data;
+
+  return feed;
+}
+
 /* GET feeds listing */
 router.get('/', async (req, res) => {
   const feedTree = await getFeedTree();
   res.send(feedTree);
+});
+
+/* GET feed */
+router.get('/:id', async (req, res) => {
+  const { id } = req.params;
+  const feed = await getFeedInfo(id);
+  res.send(feed);
 });
 
 /* GET feed entries */
@@ -54,7 +68,8 @@ router.get('/:id/entries', async (req, res) => {
   const url = `${minifluxBaseURL}/v1/feeds/${id}/entries?order=published_at&direction=desc`;
 
   const entries = (await axios.get(url, config)).data;
-  res.send(entries);
+  const feed = await getFeedInfo(id);
+  res.send({ ...entries, feed });
 });
 
 module.exports = router;

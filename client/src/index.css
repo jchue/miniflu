@@ -74,6 +74,10 @@
     @apply text-gray-400;
   }
 
+  table {
+    @apply mb-6;
+  }
+
   #root {
     height: 100%;
   }

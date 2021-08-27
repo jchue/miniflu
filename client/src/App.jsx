@@ -24,8 +24,8 @@ function Content() {
 
           <Switch location={location}>
             <Route exact path="/" component={Home} />
-            <Route exact path="/feeds/:id" component={Entries} />
             <Route exact path="/entries/:id" component={Entry} />
+            <Route exact path="/:group/:id" component={Entries} />
             <Route path="*" component={NotFound} />
           </Switch>
 

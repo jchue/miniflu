@@ -4,8 +4,9 @@ import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import 'dotenv/config';
 
-const entriesRouter = require('./routes/entries');
-const feedsRouter = require('./routes/feeds');
+import categoriesRouter from './routes/categories';
+import entriesRouter from './routes/entries';
+import feedsRouter from './routes/feeds';
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/categories', categoriesRouter);
 app.use('/entries', entriesRouter);
 app.use('/feeds', feedsRouter);
 
