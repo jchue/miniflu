@@ -8,7 +8,6 @@ import {
 } from 'react-router-dom';
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
 import './App.css';
-import Home from './views/Home';
 import Entries from './views/Entries';
 import Entry from './views/Entry';
 import NotFound from './views/NotFound';
@@ -23,7 +22,7 @@ function Content() {
         <CSSTransition classNames="fade" timeout={100} key={location.key} unmountOnExit appear>
 
           <Switch location={location}>
-            <Route exact path="/" component={Home} />
+            <Route exact path="/" component={Entries} />
             <Route exact path="/entries/:id" component={Entry} />
             <Route exact path="/:group/:id" component={Entries} />
             <Route path="*" component={NotFound} />

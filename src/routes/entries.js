@@ -13,6 +13,14 @@ const config = {
   headers,
 };
 
+/* GET entries */
+router.get('/', async (req, res) => {
+  const url = `${minifluxBaseURL}/v1/entries?order=published_at&direction=desc`;
+
+  const entries = (await axios.get(url, config)).data;
+  res.send(entries);
+});
+
 /* GET entry */
 router.get('/:id', async (req, res) => {
   const { id } = req.params;

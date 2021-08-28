@@ -22,29 +22,39 @@ class Entries extends React.Component {
   }
 
   async loadEntries(group, id) {
-    const { entries, feed } = (await axios.get(`/${group}/${id}/entries`)).data;
+    if (group && id) {
+      const response = (await axios.get(`/${group}/${id}/entries`)).data;
+      const { entries } = response;
+      const feed = response.feed || null;
 
-    let title;
-    switch (group) {
-      case 'categories':
-        // Derive category title from first entry
-        title = entries[0].feed.category.title;
-        break;
-      case 'feeds':
-        title = feed.title;
-        break;
-      default:
-        title = '';
+      let title;
+      switch (group) {
+        case 'categories':
+          title = response.category.title;
+          break;
+        case 'feeds':
+          title = response.feed.title;
+          break;
+        default:
+          title = '';
+      }
+
+      // If single feed, check for error
+      const error = feed ? feed.parsing_error_message : '';
+
+      this.setState({
+        entries,
+        error,
+        title,
+      });
+    } else {
+      // If no group/ID, get all entries
+      const { entries } = (await axios.get('/entries')).data;
+
+      this.setState({
+        entries,
+      });
     }
-
-    // If single feed, check for error
-    const error = feed ? feed.parsing_error_message : '';
-
-    this.setState({
-      entries,
-      error,
-      title,
-    });
   }
 
   render() {
