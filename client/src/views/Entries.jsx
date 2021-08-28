@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 import EntryTile from '../components/EntryTile';
+import { ErrorMessage, WarningMessage } from '../components/Alert';
 
 class Entries extends React.Component {
   constructor(props) {
@@ -8,6 +9,7 @@ class Entries extends React.Component {
 
     this.state = {
       entries: [],
+      error: '',
       title: '',
     };
   }
@@ -35,20 +37,30 @@ class Entries extends React.Component {
         title = '';
     }
 
+    // If single feed, check for error
+    const error = feed ? feed.parsing_error_message : '';
+
     this.setState({
       entries,
+      error,
       title,
     });
   }
 
   render() {
-    const { entries, title } = this.state;
+    const { entries, error, title } = this.state;
 
     return (
       <>
         <h1>
           {title}
         </h1>
+        {error && (
+          <ErrorMessage title="Error" className="mb-6">{error}</ErrorMessage>
+        )}
+        {!entries.length && (
+          <WarningMessage className="mb-6">There are no articles for this feed.</WarningMessage>
+        )}
         <div className="grid grid-cols-3 gap-4">
           {entries.map((entry) => (
             <EntryTile
