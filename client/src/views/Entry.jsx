@@ -4,6 +4,7 @@ import axios from 'axios';
 import { DateTime } from 'luxon';
 import DOMPurify from 'dompurify';
 import { ExternalLinkIcon } from '@heroicons/react/outline';
+import Loader from '../components/Loader';
 
 class Entry extends React.Component {
   constructor(props) {
@@ -16,6 +17,7 @@ class Entry extends React.Component {
         title: '',
         url: '',
       },
+      loading: false,
       published: '',
       status: '',
       title: '',
@@ -31,6 +33,10 @@ class Entry extends React.Component {
   }
 
   async loadEntry(id) {
+    this.setState({
+      loading: true,
+    });
+
     const entry = (await axios.get(`/entries/${id}`)).data;
 
     this.setState({
@@ -40,6 +46,7 @@ class Entry extends React.Component {
         title: entry.feed.title,
         url: entry.feed.site_url,
       },
+      loading: false,
       published: entry.published_at,
       status: entry.status,
       title: entry.title,
@@ -52,6 +59,7 @@ class Entry extends React.Component {
       author,
       content,
       feed,
+      loading,
       published,
       status,
       title,
@@ -59,6 +67,12 @@ class Entry extends React.Component {
     } = this.state;
     const formattedDateTime = DateTime.fromISO(published).toLocaleString(DateTime.DATETIME_MED);
     const cleanContent = DOMPurify.sanitize(content);
+
+    if (loading) {
+      return (
+        <Loader />
+      );
+    }
 
     return (
       <article className="m-auto max-w-2xl">

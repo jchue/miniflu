@@ -32,6 +32,11 @@
     @apply text-2xl;
   }
 
+  h3 {
+    @apply font-bold;
+    @apply text-xl;
+  }
+
   p {
     @apply leading-relaxed;
     @apply mb-6;
@@ -39,12 +44,13 @@
 
   ol,
   ul {
-    @apply list-inside;
     @apply mb-6;
+    @apply pl-6;
   }
 
   li {
     @apply leading-relaxed;
+    @apply pl-2;
   }
 
   ol li {
@@ -76,6 +82,34 @@
 
   table {
     @apply mb-6;
+  }
+
+  blockquote {
+    @apply border-gray-200;
+    @apply border-l-4;
+    @apply italic;
+    @apply mb-6;
+    @apply ml-4;
+    @apply pl-4;
+  }
+
+  code {
+    @apply bg-gray-100;
+    @apply px-2;
+    @apply py-1;
+    @apply rounded-sm;
+    @apply text-sm;
+  }
+
+  pre {
+    @apply bg-gray-100;
+    @apply mb-6;
+    @apply p-4;
+    @apply rounded;
+  }
+
+  pre code {
+    @apply p-0;
   }
 
   #root {

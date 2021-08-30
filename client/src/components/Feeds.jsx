@@ -37,7 +37,7 @@ class Feeds extends React.Component {
 
 function FeedTree({ categories }) {
   return (
-    <ul>
+    <ul className="pl-0">
       {categories.map((category) => (
         <Category key={category.id} category={category} />
       ))}

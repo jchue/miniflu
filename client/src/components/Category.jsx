@@ -24,7 +24,7 @@ class Category extends React.Component {
     const { category } = this.props;
 
     return (
-      <li className="font-bold list-none mb-2 text-xs">
+      <li className="font-bold list-none mb-2 pl-0 text-xs">
         <span className="flex flex-row cursor-pointer hover:bg-gray-100 text-gray-600 transition-colors">
           {expanded ? <ChevronDownIcon onClick={this.toggle} className="box-content flex-grow-0 h-4 inline pl-4 pr-2 py-2 w-4" /> : <ChevronRightIcon onClick={this.toggle} className="box-content flex-grow-0 h-4 inline pl-4 pr-2 py-2 w-4" />}
           {' '}
@@ -38,9 +38,9 @@ class Category extends React.Component {
 
 function FeedList({ feeds, expanded }) {
   return (
-    <ul className={`mb-0 overflow-hidden transition-all ${expanded ? 'max-h-screen' : 'max-h-0'}`}>
+    <ul className={`mb-0 overflow-hidden pl-0 transition-all ${expanded ? 'max-h-screen' : 'max-h-0'}`}>
       {feeds.map((feed) => (
-        <li key={feed.id} className="font-normal list-none normal-case text-xs">
+        <li key={feed.id} className="font-normal list-none normal-case pl-0 text-xs">
           <Link to={`/feeds/${feed.id}`} className="block px-10 py-2 hover:bg-gray-100 text-gray-600 transition-colors">{feed.title}</Link>
         </li>
       ))}

@@ -13,7 +13,7 @@ function EntryTile({
 
   return (
     <Link to={`/entries/${id}`} className="hover:bg-gray-50 p-4 rounded-lg shadow text-left transition-colors">
-      <span className="block font-bold mb-2 text-gray-600 text-sm">{title}</span>
+      <span className="block font-bold leading-snug mb-2 text-gray-600 text-sm">{title}</span>
       <span className="block mb-0.5 text-gray-400 text-xs">{feed}</span>
       <span className="block text-gray-400 text-xs">{formattedDateTime}</span>
       <span className="hidden">{status}</span>

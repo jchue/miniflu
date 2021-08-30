@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 import EntryTile from '../components/EntryTile';
+import Loader from '../components/Loader';
 import { ErrorMessage, WarningMessage } from '../components/Alert';
 
 class Entries extends React.Component {
@@ -10,6 +11,7 @@ class Entries extends React.Component {
     this.state = {
       entries: [],
       error: '',
+      loading: false,
       title: '',
     };
   }
@@ -22,6 +24,10 @@ class Entries extends React.Component {
   }
 
   async loadEntries(group, id) {
+    this.setState({
+      loading: true,
+    });
+
     if (group && id) {
       const response = (await axios.get(`/${group}/${id}/entries`)).data;
       const { entries } = response;
@@ -45,6 +51,7 @@ class Entries extends React.Component {
       this.setState({
         entries,
         error,
+        loading: false,
         title,
       });
     } else {
@@ -53,12 +60,24 @@ class Entries extends React.Component {
 
       this.setState({
         entries,
+        loading: false,
       });
     }
   }
 
   render() {
-    const { entries, error, title } = this.state;
+    const {
+      entries,
+      error,
+      loading,
+      title,
+    } = this.state;
+
+    if (loading) {
+      return (
+        <Loader />
+      );
+    }
 
     return (
       <>
