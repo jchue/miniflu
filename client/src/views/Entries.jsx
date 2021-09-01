@@ -90,17 +90,30 @@ class Entries extends React.Component {
         {!entries.length && (
           <WarningMessage className="mb-6">There are no articles for this feed.</WarningMessage>
         )}
-        <div className="grid grid-cols-3 gap-4">
-          {entries.map((entry) => (
-            <EntryTile
-              key={entry.id}
-              feed={entry.feed.title}
-              id={entry.id}
-              published={entry.published_at}
-              status={entry.status}
-              title={entry.title}
-            />
-          ))}
+        <div className="gap-0 grid grid-cols-3">
+          {entries.map((entry) => {
+            // Get thumbnail from enclosures only if image
+            let thumbnail = '';
+            if (entry.enclosures && entry.enclosures.length) {
+              const imgRegExp = /^image/;
+
+              if (imgRegExp.test(entry.enclosures[0].mime_type)) {
+                thumbnail = entry.enclosures[0].url;
+              }
+            }
+
+            return (
+              <EntryTile
+                key={entry.id}
+                feed={entry.feed.title}
+                id={entry.id}
+                published={entry.published_at}
+                status={entry.status}
+                thumbnail={thumbnail}
+                title={entry.title}
+              />
+            );
+          })}
         </div>
       </>
     );

@@ -1,5 +1,6 @@
 import express from 'express';
 import axios from 'axios';
+import { getEntryEnclosures } from '../util';
 
 const router = express.Router();
 
@@ -66,10 +67,19 @@ router.get('/:id', async (req, res) => {
 router.get('/:id/entries', async (req, res) => {
   const { id } = req.params;
   const url = `${minifluxBaseURL}/v1/feeds/${id}/entries?order=published_at&direction=desc`;
+  const entriesData = (await axios.get(url, config)).data;
 
-  const entries = (await axios.get(url, config)).data;
+  // Until miniflux/v2#1059 is addressed, need to make separate call to add enclosures
+  const entriesWithEnclosures = await Promise.all(entriesData.entries.map(async (entry) => {
+    const enclosures = await getEntryEnclosures(entry.id);
+
+    return { ...entry, enclosures };
+  }));
+
   const feed = await getFeedInfo(id);
-  res.send({ ...entries, feed });
+
+  // Reconstruct response with entries with enclosures
+  res.send({ total: entriesData.total, entries: entriesWithEnclosures, feed });
 });
 
 module.exports = router;
