@@ -14,6 +14,19 @@ const config = {
   headers,
 };
 
+async function getFeedIcon(id) {
+  const url = `${minifluxBaseURL}/v1/feeds/${id}/icon`;
+
+  let icon;
+  try {
+    icon = (await axios.get(url, config)).data;
+  } catch (error) {
+    // No icon
+  }
+
+  return icon;
+}
+
 async function getCategories() {
   const url = `${minifluxBaseURL}/v1/categories`;
   const categories = (await axios.get(url, config)).data;
@@ -25,7 +38,13 @@ async function getCategoryFeeds(categoryID) {
   const url = `${minifluxBaseURL}/v1/categories/${categoryID}/feeds`;
   const feeds = (await axios.get(url, config)).data;
 
-  return feeds;
+  const feedsWithIcons = await Promise.all(feeds.map(async (feed) => {
+    const icon = await getFeedIcon(feed.id);
+
+    return { ...feed, icon };
+  }));
+
+  return feedsWithIcons;
 }
 
 async function getFeedTree() {

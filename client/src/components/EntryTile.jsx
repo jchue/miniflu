@@ -21,7 +21,7 @@ function EntryTile({
   }
 
   return (
-    <Link to={`/entries/${id}`} className="hover:bg-gray-50 mb-4 p-4 rounded-lg text-left transition-colors">
+    <Link to={`/entries/${id}`} className="hover:bg-gray-100 mb-4 p-4 rounded-lg text-left transition-colors">
       {thumbnailTile}
       <span className="block font-bold leading-snug mb-2 text-gray-600 text-sm">{title}</span>
       <span className="block mb-0.5 text-gray-400 text-xs">{feed}</span>
