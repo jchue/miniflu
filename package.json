@@ -1,6 +1,6 @@
 {
-  "name": "miniflux-client",
-  "version": "0.0.0",
+  "name": "iniflux",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "concurrently -n \"server,client\" -c \"magenta,blue\" \"npm run server-dev\" \"npm run client-dev\"",
