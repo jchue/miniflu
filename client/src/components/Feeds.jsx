@@ -16,7 +16,7 @@ class Feeds extends React.Component {
   }
 
   async loadFeeds() {
-    const feeds = (await axios.get('/feeds')).data;
+    const feeds = (await axios.get('/api/feeds')).data;
 
     this.setState({
       feeds,

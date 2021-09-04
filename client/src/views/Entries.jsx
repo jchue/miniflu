@@ -29,7 +29,7 @@ class Entries extends React.Component {
     });
 
     if (group && id) {
-      const response = (await axios.get(`/${group}/${id}/entries`)).data;
+      const response = (await axios.get(`/api/${group}/${id}/entries`)).data;
       const { entries } = response;
       const feed = response.feed || null;
 
@@ -56,7 +56,7 @@ class Entries extends React.Component {
       });
     } else {
       // If no group/ID, get all entries
-      const { entries } = (await axios.get('/entries')).data;
+      const { entries } = (await axios.get('/api/entries')).data;
 
       this.setState({
         entries,

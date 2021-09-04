@@ -37,7 +37,7 @@ class Entry extends React.Component {
       loading: true,
     });
 
-    const entry = (await axios.get(`/entries/${id}`)).data;
+    const entry = (await axios.get(`/api/entries/${id}`)).data;
 
     this.setState({
       author: entry.author,

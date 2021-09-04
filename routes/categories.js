@@ -1,6 +1,8 @@
-import express from 'express';
-import axios from 'axios';
-import { getEntryEnclosures } from '../util';
+const express = require('express');
+const axios = require('axios');
+const util = require('../util');
+
+const { getEntryEnclosures } = util;
 
 const router = express.Router();
 

@@ -5,10 +5,8 @@
   "scripts": {
     "dev": "concurrently -n \"server,client\" -c \"magenta,blue\" \"npm run server-dev\" \"npm run client-dev\"",
     "client-dev": "cd client && npm run start",
-    "server-dev": "nodemon --exec babel-node src/bin/www",
-    "build": "npm run server-build && npm run client-build",
-    "client-build": "cd client && npm run build",
-    "server-build": "babel src --out-dir dist",
+    "server-dev": "nodemon ./bin/www",
+    "build": "cd client && npm run build && mv build ..",
     "start": "node ./bin/www"
   },
   "dependencies": {

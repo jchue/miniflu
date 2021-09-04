@@ -1,4 +1,4 @@
-import axios from 'axios';
+const axios = require('axios');
 
 const minifluxAPIKey = process.env.MINIFLUX_API_KEY;
 const minifluxBaseURL = process.env.MINIFLUX_BASE_URL;
@@ -17,4 +17,4 @@ async function getEntryEnclosures(id) {
   return enclosures;
 }
 
-export { getEntryEnclosures };
+module.exports = { getEntryEnclosures };
