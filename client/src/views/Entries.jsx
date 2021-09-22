@@ -14,6 +14,8 @@ class Entries extends React.Component {
       loading: false,
       title: '',
     };
+
+    this.handleStatusChange = this.handleStatusChange.bind(this);
   }
 
   componentDidMount() {
@@ -21,6 +23,27 @@ class Entries extends React.Component {
     const { group, id } = match.params;
 
     this.loadEntries(group, id);
+  }
+
+  async handleStatusChange(id, status) {
+    const data = {
+      status,
+    };
+
+    await axios.put(`/api/entries/${id}`, data);
+
+    const { entries } = this.state;
+
+    const updatedEntries = entries.map((entry) => {
+      if (entry.id === id) {
+        return { ...entry, status };
+      }
+      return entry;
+    });
+
+    this.setState({
+      entries: updatedEntries,
+    });
   }
 
   async loadEntries(group, id) {
@@ -111,6 +134,7 @@ class Entries extends React.Component {
                 status={entry.status}
                 thumbnail={thumbnail}
                 title={entry.title}
+                onStatusChange={this.handleStatusChange}
               />
             );
           })}

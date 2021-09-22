@@ -11,6 +11,7 @@ const minifluxBaseURL = process.env.MINIFLUX_BASE_URL;
 
 const headers = {
   'X-Auth-Token': minifluxAPIKey,
+  'Content-Type': 'application/json',
 };
 const config = {
   headers,
@@ -39,6 +40,20 @@ router.get('/:id', async (req, res) => {
 
   const entries = (await axios.get(url, config)).data;
   res.send(entries);
+});
+
+/* PUT entry */
+router.put('/:id', async (req, res) => {
+  const { id } = req.params;
+  const url = `${minifluxBaseURL}/v1/entries`;
+  const data = {
+    entry_ids: [parseInt(id, 10)],
+    status: req.body.status,
+  };
+
+  // TODO: Error handling
+  await axios.put(url, data, config);
+  res.sendStatus(204);
 });
 
 module.exports = router;

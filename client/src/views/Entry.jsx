@@ -37,8 +37,14 @@ class Entry extends React.Component {
       loading: true,
     });
 
-    const entry = (await axios.get(`/api/entries/${id}`)).data;
+    // Automatically set status to read on load
+    const data = {
+      status: 'read',
+    };
+    await axios.put(`/api/entries/${id}`, data);
 
+    // Get entry data and finish loading
+    const entry = (await axios.get(`/api/entries/${id}`)).data;
     this.setState({
       author: entry.author,
       content: entry.content,
