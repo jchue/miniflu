@@ -6,7 +6,7 @@ A simple, self-hosted client for the [Miniflux](https://github.com/miniflux) RSS
 
 ![Reader](https://user-images.githubusercontent.com/5141427/140625262-1380498b-cdc9-4e12-987a-51845165f124.png)
 
-This is mainly a way for me to learn to create a full-stack React app but was also motivated by the desire for a better viewing experience with Miniflux. I appreciated the philosophy of the project but wanted something with a little more flare.
+This is mainly a way for me to learn to create a React app but was also motivated by the desire for a better viewing experience with Miniflux. I appreciated the philosophy of the project but wanted something with a little more flare.
 
 ## Requirements
 
