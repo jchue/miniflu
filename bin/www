@@ -5,7 +5,7 @@
  */
 
 const http = require('http');
-const debug = require('debug')('miniflux-client:server');
+const debug = require('debug')('miniflu:server');
 const app = require('../app');
 require('dotenv').config();
 
